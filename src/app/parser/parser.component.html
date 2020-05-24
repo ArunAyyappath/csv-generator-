@@ -1,0 +1,21 @@
+<div>
+  <mat-vertical-stepper linear='true' #stepper>
+    <mat-step  [stepControl]="parserFormGroup">
+      <form [formGroup]="parserFormGroup">
+        <ng-template matStepLabel>
+          Export excel file
+        </ng-template>
+        <input type='file' formControlName="inputFile" ref-file
+          (change)='onFileChange(file.files)' accept=".xlsx, .xls" required/>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>Generating please wait . . .</p>
+      <div>
+        <button mat-raised-button matStepperPrevious>Back</button>
+        <button mat-raised-button>Done</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>
