@@ -4,3 +4,32 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+$invalid-color: red;
+$helper-color: blue;
+$half-spacing: 10px;
+
+.error-sm {
+  color: $invalid-color;
+  font-size: 12px;
+  margin: $half-spacing;
+}
+
+.invalid {
+  border: 1px solid $invalid-color;
+}
+
+div {
+  &.helper {
+    font-size: 12px;
+    margin: $half-spacing;
+    color: $helper-color;
+  }
+  &.warning {
+    @extend .error-sm;
+
+    &.link {
+      cursor: pointer;
+    }
+  }
+}

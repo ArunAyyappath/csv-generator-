@@ -1,20 +1,46 @@
-<div>
+<div class='container'>
   <mat-vertical-stepper linear='true' #stepper>
     <mat-step  [stepControl]="parserFormGroup">
       <form [formGroup]="parserFormGroup">
         <ng-template matStepLabel>
           Export excel file
         </ng-template>
-        <input type='file' formControlName="inputFile" ref-file
-          (change)='onFileChange(file.files)' accept=".xlsx, .xls" required/>
+        <mat-slide-toggle
+          [checked]="isChecked"
+          (change)="slideToggler($event)">
+          <span *ngIf="isChecked">Zoom Data</span>
+        </mat-slide-toggle>
+        <br>
+        <div [hidden]='isChecked' class='helper'>
+          excel data converter will be available soon.
+        </div>
+        <div [hidden]='!isChecked'>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>provide the static header</mat-label>
+            <input matInput placeholder="Ex. dkan3....~Xvsj1...."
+            [ngClass]="{ 'invalid': formControls.staticKey.invalid }" formControlName='staticKey'>
+          </mat-form-field>
+          <br>
+          <input type='file' formControlName="inputFile" ref-file [hidden]='formControls.staticKey.invalid'
+            (change)='onFileChange(file.files)' accept=".xlsx, .xls" required/>
+            <div class='warning link' (click)="generateSampleCsv('ZOOM')">download sample data</div>
+            <div class='warning' *ngIf="hasError">
+              *please check all the mandatory fields and try again.
+            </div>
+            <div class='helper' *ngIf="isChecked && formControls.staticKey.invalid">
+              *please provide the zoom static key.
+            </div>
+            <div class='helper' *ngIf="formControls.inputFile.invalid">
+              *please export an excel(.xlsx, .xls) as per sample provided to start.
+            </div>
+        </div>
       </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>Generating please wait . . .</p>
+      <p>Generated successfully . . .</p>
       <div>
-        <button mat-raised-button matStepperPrevious>Back</button>
-        <button mat-raised-button>Done</button>
+        <button mat-raised-button matStepperPrevious>Generate new</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
