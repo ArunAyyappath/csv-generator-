@@ -3,7 +3,7 @@
     <mat-step  [stepControl]="parserFormGroup">
       <form [formGroup]="parserFormGroup">
         <ng-template matStepLabel>
-          Export excel file
+          Import excel file
         </ng-template>
         <mat-slide-toggle
           [checked]="isChecked"
@@ -23,7 +23,7 @@
           <br>
           <input type='file' formControlName="inputFile" ref-file [hidden]='formControls.staticKey.invalid'
             (change)='onFileChange(file.files)' accept=".xlsx, .xls" required/>
-            <div class='warning link' (click)="generateSampleCsv('ZOOM')">download sample data</div>
+            <div class='warning link' (click)="generateSampleCsv('ZOOM')">Export sample data</div>
             <div class='warning' *ngIf="hasError">
               *please check all the mandatory fields and try again.
             </div>
