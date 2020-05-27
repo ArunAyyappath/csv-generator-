@@ -4,3 +4,10 @@
 .mat-form-field {
   margin-top: 16px;
 }
+
+div {
+  &.container{
+    width: 300px;
+    height: 300px;
+  }
+}
